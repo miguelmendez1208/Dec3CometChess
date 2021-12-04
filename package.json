@@ -1,0 +1,9 @@
+{
+  "name": "ccproj",
+  "version": "0.0.0",
+  "description": "CCProj",
+  "main": "index.js",
+  "author": {
+    "name": ""
+  }
+}
