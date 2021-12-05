@@ -25,7 +25,7 @@
             <a href="#play"><button>play</button></a>
             <script>
                 document.getElementById("login").addEventListener("click", submitPassword);
-                document.getElementById("signup").addEventListener("click", signUp);
+                //document.getElementById("signup").addEventListener("click", signUp);
 
                 function signUp() {
                     window.location.replace("#signUpPage");
@@ -132,6 +132,7 @@
 
             </script>
             <button id="signup">Sign Up</button>
+            <script> document.getElementById("signup").addEventListener("click", signUp); </script>
             <!-- DISPLAYS ANY NEEDED OUTPUT SUCH AS INVALID LOGIN           -->
             <div id="txtHintLogin"></div>
         </div>
@@ -156,6 +157,8 @@
             <div id="pgn"></div>
             <!--<button id="changePlayer">SwitchPlayer</button> -->
             <button id="flipOrientationBtn">Flip Orientation</button>
+            <button id="saveGameBtn">Save Game</button>
+            <div id="popUpSave"></div>
             <!--- End Example HTML -------------------------------------------------------->
 
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -197,8 +200,14 @@ function onDragStart (source, piece, position, orientation) {
     return false; // If user tries to pick up a piece they're not allowed to, don't allow it
   }
 }
-function onChange(oldPos, newPos){
-
+function saveGame(){
+  var gameSave = "allo";
+  gameSave = game.fen();
+  //console.log("saveGame");
+  //$("savePart").innerHTML = "<div class=\"popUpSave\"><div class=\"popUpHeading\">FEN</div> <input class=\"inputSave\"  id=\"inputSave\" readonly=\"readonly\"></input></div>";
+  //$("inputSave").innerHTML = gameSave;
+  console.log("saveGame" + gameSave);
+  //return gameSave;
 }
 function onlinePosition(passFen){
     console.log("Receiving: " + passFen);
@@ -279,14 +288,15 @@ var config = {
   onDragStart: onDragStart,
   onDrop: onDrop,
   onSnapEnd: onSnapEnd,
-  onChange: onChange,
   pieceTheme: pieceTheme
 }
 board = Chessboard('myBoard', config)
 $('#flipOrientationBtn').on('click', board.flip) // Remove this later
+//$('#saveGameBtn').on('click', saveGame()); //save game
 updateStatus()
 //Assign color
 socket.on('serverColor', function(colour) {
+  //$('#saveGameBtn').on('click', saveGame()); //save game
   if(colour===-1){
     board.flip();
     console.log("true")
